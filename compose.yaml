@@ -2,7 +2,7 @@ volumes:
   uv:
 
 services:
-  mcp-atlassian:
+  atlassian:
     image: node:23-bookworm
     command: npx -y supergateway --port 8001 --stdio "uvx mcp-atlassian"
     entrypoint: /app/docker-entrypoint.sh
