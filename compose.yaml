@@ -1,0 +1,18 @@
+volumes:
+  uv:
+
+services:
+  mcp-atlassian:
+    image: node:23-bookworm
+    command: npx -y supergateway --port 8001 --stdio "uvx mcp-atlassian"
+    entrypoint: /app/docker-entrypoint.sh
+    volumes:
+      - ./servers/atlassian/docker-entrypoint.sh:/app/docker-entrypoint.sh
+      - ./servers/atlassian/.bashrc:/root/.bashrc
+      - uv:/uv
+    environment:
+      - UV_INSTALL_DIR=/uv
+    ports:
+      - 8001:8001
+    env_file:
+      - ./servers/atlassian/.env

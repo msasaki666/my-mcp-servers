@@ -1,0 +1,59 @@
+# OS固有のファイル
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE・エディタの設定
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 依存関係
+node_modules/
+vendor/
+.env
+.env.local
+.env.*.local
+
+# ビルド出力
+dist/
+build/
+out/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# コンパイル済みファイル
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# パッケージング
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# データベース
+*.sqlite
+*.db
+
+# キャッシュ
+.cache/
+.temp/
+.tmp/
+*.tmp
