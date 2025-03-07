@@ -16,3 +16,10 @@ services:
       - 8001:8001
     env_file:
       - ./servers/atlassian/.env
+  slack:
+    image: node:23-bookworm
+    command: npx -y supergateway --port 8002 --stdio "npx -y @modelcontextprotocol/server-slack"
+    ports:
+      - 8002:8002
+    env_file:
+      - ./servers/slack/.env
