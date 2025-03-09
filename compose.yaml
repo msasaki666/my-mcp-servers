@@ -23,3 +23,13 @@ services:
       - 8002:8002
     env_file:
       - ./servers/slack/.env
+  puppeteer:
+    image: mcp/puppeteer
+    entrypoint: npx
+    command: -y supergateway --port 8003 --stdio "node /project/dist/index.js"
+    ports:
+      - 8003:8003
+    environment:
+      - DOCKER_CONTAINER=true
+    init: true
+    stdin_open: true
