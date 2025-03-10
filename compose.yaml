@@ -1,9 +1,11 @@
+x-node-base-image: &node-base-image node:23-bookworm
+
 volumes:
   uv:
 
 services:
   atlassian:
-    image: node:23-bookworm
+    image: *node-base-image
     command: npx -y supergateway --port 8001 --stdio "uvx mcp-atlassian"
     entrypoint: /app/docker-entrypoint.sh
     volumes:
@@ -17,7 +19,7 @@ services:
     env_file:
       - ./servers/atlassian/.env
   slack:
-    image: node:23-bookworm
+    image: *node-base-image
     command: npx -y supergateway --port 8002 --stdio "npx -y @modelcontextprotocol/server-slack"
     ports:
       - 8002:8002
@@ -33,3 +35,17 @@ services:
       - DOCKER_CONTAINER=true
     init: true
     stdin_open: true
+  memory:
+    image: *node-base-image
+    command: npx -y supergateway --port 8004 --stdio "npx -y @modelcontextprotocol/server-memory"
+    ports:
+      - 8004:8004
+    environment:
+      - MEMORY_FILE_PATH=/app/memory.json
+    volumes:
+      - ./servers/memory/memory.json:/app/memory.json
+  sequential-thinking:
+    image: *node-base-image
+    command: npx -y supergateway --port 8005 --stdio "npx -y @modelcontextprotocol/server-sequential-thinking"
+    ports:
+      - 8005:8005

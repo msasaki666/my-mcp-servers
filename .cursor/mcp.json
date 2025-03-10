@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "atlassian": {
+      "url": "http://localhost:8001/sse"
+    },
+    "slack": {
+      "url": "http://localhost:8002/sse"
+    },
+    "puppeteer": {
+      "url": "http://localhost:8003/sse"
+    },
+    "memory": {
+      "url": "http://localhost:8004/sse"
+    },
+    "sequential-thinking": {
+      "url": "http://localhost:8005/sse"
+    }
+  }
+}
