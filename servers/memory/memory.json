@@ -1,0 +1,27 @@
+{"type":"entity","name":"my-mcp-servers","entityType":"リポジトリ","observations":["Docker Composeを使用して複数のMCPサーバーを管理するリポジトリ","node:23-bookwormをベースイメージとして使用","Taskfileを使用してサーバーの起動と停止を管理","複数の専用サーバー（atlassian, slack, puppeteer, memory, sequential-thinking, playwright）が含まれている"]}
+{"type":"entity","name":"compose.yaml","entityType":"設定ファイル","observations":["Docker Compose設定ファイル","各MCPサーバーのコンテナ設定を定義","共通ボリューム（uv）の定義","ポートマッピングとコマンド設定","supergateway経由でMCPサーバーを起動する設定パターン"]}
+{"type":"entity","name":"miror_servers","entityType":"ディレクトリ","observations":["サーバーの実装コードを含むサブモジュール","TypeScriptプロジェクト構成","npmパッケージとして管理されている","memoryサーバーの実装コードを含む"]}
+{"type":"entity","name":"Taskfile.yml","entityType":"設定ファイル","observations":["タスクランナー設定ファイル","docker-compose操作の簡略化コマンドを定義","PlaywrightのMCPサーバー起動コマンドを含む","サーバーの起動・停止のエイリアスを提供"]}
+{"type":"entity","name":"atlassian-server","entityType":"サーバー","observations":["Atlassian製品（Jira）と連携するためのMCPサーバー","ポート8001で動作","環境変数に設定ファイル（.env）を使用","カスタムエントリポイントスクリプトを持つ",".bashrcでカスタムシェル環境を設定"]}
+{"type":"entity","name":"slack-server","entityType":"サーバー","observations":["Slackと連携するためのMCPサーバー","ポート8002で動作","@modelcontextprotocol/server-slackパッケージを使用","環境変数ファイル（.env）で設定を管理"]}
+{"type":"entity","name":"puppeteer-server","entityType":"サーバー","observations":["Puppeteerを使用したブラウザ自動化のためのMCPサーバー","ポート8003で動作","カスタムイメージ mcp/puppeteer を使用","Dockerコンテナ内で実行されることを示す環境変数を含む"]}
+{"type":"entity","name":"memory-server","entityType":"サーバー","observations":["MCPのメモリ管理のためのサーバー","ポート8004で動作","miror_servers/src/memory/dist/index.jsを実行","memory.jsonファイルをデータストアとして使用","カスタムエントリポイントスクリプトを持つ"]}
+{"type":"entity","name":"sequential-thinking-server","entityType":"サーバー","observations":["逐次思考（Sequential Thinking）のためのMCPサーバー","ポート8005で動作","@modelcontextprotocol/server-sequential-thinkingパッケージを使用"]}
+{"type":"entity","name":"playwright-server","entityType":"サーバー","observations":["Playwrightを使用したブラウザテスト自動化のためのMCPサーバー","ポート8006で動作","@playwright/mcpパッケージを使用","Docker Composeではなく直接npxで実行される","ヘッドレスモードで動作"]}
+{"type":"relation","from":"my-mcp-servers","to":"compose.yaml","relationType":"利用する"}
+{"type":"relation","from":"my-mcp-servers","to":"Taskfile.yml","relationType":"利用する"}
+{"type":"relation","from":"my-mcp-servers","to":"miror_servers","relationType":"含む"}
+{"type":"relation","from":"my-mcp-servers","to":"atlassian-server","relationType":"含む"}
+{"type":"relation","from":"my-mcp-servers","to":"slack-server","relationType":"含む"}
+{"type":"relation","from":"my-mcp-servers","to":"puppeteer-server","relationType":"含む"}
+{"type":"relation","from":"my-mcp-servers","to":"memory-server","relationType":"含む"}
+{"type":"relation","from":"my-mcp-servers","to":"sequential-thinking-server","relationType":"含む"}
+{"type":"relation","from":"my-mcp-servers","to":"playwright-server","relationType":"含む"}
+{"type":"relation","from":"compose.yaml","to":"atlassian-server","relationType":"設定する"}
+{"type":"relation","from":"compose.yaml","to":"slack-server","relationType":"設定する"}
+{"type":"relation","from":"compose.yaml","to":"puppeteer-server","relationType":"設定する"}
+{"type":"relation","from":"compose.yaml","to":"memory-server","relationType":"設定する"}
+{"type":"relation","from":"compose.yaml","to":"sequential-thinking-server","relationType":"設定する"}
+{"type":"relation","from":"Taskfile.yml","to":"compose.yaml","relationType":"実行する"}
+{"type":"relation","from":"Taskfile.yml","to":"playwright-server","relationType":"起動する"}
+{"type":"relation","from":"miror_servers","to":"memory-server","relationType":"実装を提供する"}
