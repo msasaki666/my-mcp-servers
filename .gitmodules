@@ -1,0 +1,3 @@
+[submodule "miror_servers"]
+	path = miror_servers
+	url = https://github.com/msasaki666/servers.git
