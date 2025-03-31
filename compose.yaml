@@ -37,13 +37,16 @@ services:
     stdin_open: true
   memory:
     image: *node-base-image
-    command: npx -y supergateway --port 8004 --stdio "npx -y @modelcontextprotocol/server-memory"
+    entrypoint: /root/servers/memory/docker-entrypoint.sh
+    command: npx -y supergateway --port 8004 --stdio "node /root/miror_servers/src/memory/dist/index.js"
     ports:
       - 8004:8004
     environment:
-      - MEMORY_FILE_PATH=/app/memory.json
+      - MEMORY_FILE_PATH=/root/servers/memory/memory.json
     volumes:
-      - ./servers/memory/memory.json:/app/memory.json
+      - ./servers/memory/:/root/servers/memory/
+      - ./miror_servers/:/root/miror_servers/
+    working_dir: /root
   sequential-thinking:
     image: *node-base-image
     command: npx -y supergateway --port 8005 --stdio "npx -y @modelcontextprotocol/server-sequential-thinking"
