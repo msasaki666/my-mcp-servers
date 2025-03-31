@@ -1,0 +1,31 @@
+# https://taskfile.dev
+
+version: '3'
+
+includes:
+  base:
+    taskfile: ~/Taskfile.yml
+    dir: ./
+    internal: true
+
+tasks:
+  default:
+    cmds:
+      - task: base:default
+  up-all:
+    cmds:
+      - cmd: docker compose up -d
+      - cmd: npx @playwright/mcp@v0.0.7 --port 8006 --headless &
+    aliases:
+      - ua
+  stop-all:
+    cmds:
+      - cmd: docker compose stop
+      - cmd: ps aux | grep -E 'npm exec @playwright/mcp@v0.0.7 --port 8006 --headless' | grep -v 'grep' | awk '{print $2}' | xargs -- kill
+    aliases:
+      - sa
+  up-playwright:
+    cmds:
+      - cmd: npx @playwright/mcp@v0.0.7 --port 8006 --headless
+    aliases:
+      - up
