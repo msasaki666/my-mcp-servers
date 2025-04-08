@@ -6,14 +6,20 @@
     "slack": {
       "url": "http://localhost:8002/sse"
     },
-    "puppeteer": {
-      "url": "http://localhost:8003/sse"
-    },
     "memory": {
       "url": "http://localhost:8004/sse"
     },
     "sequential-thinking": {
       "url": "http://localhost:8005/sse"
+    },
+    "playwright": {
+      "url": "http://localhost:8006/sse"
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "url": "http://localhost:8007/sse"
+    },
+    "awslabs.cdk-mcp-server": {
+      "url": "http://localhost:8008/sse"
     }
   }
 }

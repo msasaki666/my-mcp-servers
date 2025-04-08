@@ -12,20 +12,45 @@ tasks:
   default:
     cmds:
       - task: base:default
-  up-all:
-    cmds:
-      - cmd: docker compose up -d
-      - cmd: npx @playwright/mcp@v0.0.7 --port 8006 --headless &
-    aliases:
-      - ua
-  stop-all:
-    cmds:
-      - cmd: docker compose stop
-      - cmd: ps aux | grep -E 'npm exec @playwright/mcp@v0.0.7 --port 8006 --headless' | grep -v 'grep' | awk '{print $2}' | xargs -- kill
-    aliases:
-      - sa
   up-playwright:
     cmds:
-      - cmd: npx @playwright/mcp@v0.0.7 --port 8006 --headless
+      - cmd: npx @playwright/mcp@v0.0.9 --port 8006 --headless
     aliases:
       - up
+  stop-playwright:
+    cmds:
+      - cmd: ps aux | grep -E 'npm exec @playwright/mcp' | grep -v 'grep' | awk '{print $2}' | xargs -- kill -QUIT
+    aliases:
+      - sp
+  up-aws-documentation:
+    cmds:
+      - cmd: uvx awslabs.aws-documentation-mcp-server@latest --port 8007 --sse
+    aliases:
+      - uad
+  stop-aws-documentation:
+    cmds:
+      - cmd: ps aux | grep -E 'uvx' | grep -E 'awslabs.aws-documentation-mcp-server' | grep -v 'grep' | awk '{print $2}' | xargs -- kill -QUIT
+    aliases:
+      - sad
+  up-aws-cdk:
+    cmds:
+      - cmd: uvx awslabs.cdk-mcp-server@latest --port 8008 --sse
+    aliases:
+      - uac
+  stop-aws-cdk:
+    cmds:
+      - cmd: ps aux | grep -E 'uvx' | grep -E 'awslabs.cdk-mcp-server' | grep -v 'grep' | awk '{print $2}' | xargs -- kill -QUIT
+    aliases:
+      - sac
+  up-atlassian:
+    dotenv:
+      - servers/atlassian/.env
+    cmds:
+      - cmd: uvx --from git+https://github.com/sooperset/mcp-atlassian@fa49d44d456df3a099464d856e7e795499036e12 mcp-atlassian --transport sse --port 8001 --read-only
+    aliases:
+      - uat
+  stop-atlassian:
+    cmds:
+      - cmd: ps aux | grep -E 'uvx' | grep -E 'mcp-atlassian' | grep -v 'grep' | awk '{print $2}' | xargs -- kill -QUIT
+    aliases:
+      - sat

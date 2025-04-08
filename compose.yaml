@@ -4,20 +4,6 @@ volumes:
   uv:
 
 services:
-  atlassian:
-    image: *node-base-image
-    command: npx -y supergateway --port 8001 --stdio "uvx mcp-atlassian"
-    entrypoint: /app/docker-entrypoint.sh
-    volumes:
-      - ./servers/atlassian/docker-entrypoint.sh:/app/docker-entrypoint.sh
-      - ./servers/atlassian/.bashrc:/root/.bashrc
-      - uv:/uv
-    environment:
-      - UV_INSTALL_DIR=/uv
-    ports:
-      - 8001:8001
-    env_file:
-      - ./servers/atlassian/.env
   slack:
     image: *node-base-image
     command: npx -y supergateway --port 8002 --stdio "npx -y @modelcontextprotocol/server-slack"
@@ -25,16 +11,6 @@ services:
       - 8002:8002
     env_file:
       - ./servers/slack/.env
-  puppeteer:
-    image: mcp/puppeteer
-    entrypoint: npx
-    command: -y supergateway --port 8003 --stdio "node /project/dist/index.js"
-    ports:
-      - 8003:8003
-    environment:
-      - DOCKER_CONTAINER=true
-    init: true
-    stdin_open: true
   memory:
     image: *node-base-image
     entrypoint: /root/servers/memory/docker-entrypoint.sh
